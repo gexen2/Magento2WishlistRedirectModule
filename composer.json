@@ -1,0 +1,25 @@
+{
+  "name": "Crealevant/AddToWishlistNotRedirect",
+  "description": "A module that lets you customize whether you want to redirect customers to wishlist page or stay at current page when they add products to their wishlist",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Crealevant",
+      "homepage": "https://www.crealevant.se"
+    }
+  ],
+  "require": {
+    "php": "~5.6.0|7.0.2|7.0.4|~7.0.6"
+  },
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "Crealevant\\AddToWishlistNotRedirect\\": ""
+    }
+  }
+}

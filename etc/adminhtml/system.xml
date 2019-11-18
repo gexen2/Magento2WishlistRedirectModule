@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+      <!-- <resource>Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect</resource>
+      Throws error: Element 'resource': This element is not expected.
+      Expected is one of ( tab, section, include ).-->
+      <!-- Test2 -->
+        <section id="wishlist">
+          <resource>Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect</resource>
+          <!-- <resource>Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect</resource>
+          Don't throw error. Doesn't filter out Wishlist Redirect dropdown for user who lacks permisson -->
+            <group id="general">
+              <!-- <resource>Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect</resource>
+              Throws error: Element 'resource': This element is not expected -->
+                <field id="redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Wishlist Redirect</label>
+                    <source_model>Crealevant\AddToWishlistNotRedirect\Model\Config\Source\Options</source_model>
+                    <!-- <resource>Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect</resource>
+                    Throws error: Element 'resource': This element is not expected -->
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
