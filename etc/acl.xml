@@ -2,7 +2,18 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
         <resources>
-          <resource id="Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect" title="Wishlist No Redirect" sortOrder="51" />
+          <resource id="Magento_Backend::admin">
+            <resource id="Magento_Backend::stores">
+              <resource id="Magento_Backend::stores_settings">
+                <resource id="Magento_Config::config">
+                  <resource id="Magento_Wishlist::config_wishlist">
+                    <resource id="Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect" title="Wishlist No Redirect" sortOrder="51" />
+                  </resource>
+                </resource>
+              </resource>
+            </resource>
+          </resource>
+          <!-- <resource id="Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect" title="Wishlist No Redirect" sortOrder="51" /> -->
         </resources>
     </acl>
 </config>
