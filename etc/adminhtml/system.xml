@@ -15,6 +15,9 @@
                 <field id="redirect" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Wishlist Redirect</label>
                     <source_model>Crealevant\AddToWishlistNotRedirect\Model\Config\Source\Options</source_model>
+                    <depends>
+                      <field id="active">1</field>
+                    </depends>
                     <!-- <resource>Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect</resource>
                     Throws error: Element 'resource': This element is not expected -->
                 </field>
