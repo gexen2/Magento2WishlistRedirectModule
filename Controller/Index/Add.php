@@ -22,6 +22,7 @@ class Add extends \Magento\Wishlist\Controller\Index\Add
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
+
     public function execute()
     {
         /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
@@ -103,8 +104,36 @@ class Add extends \Magento\Wishlist\Controller\Index\Add
                 __('We can\'t add the item to Wish List right now.')
             );
         }
+        /*
+        $configValue = $this->helper('Crealevant\AddToWishlistNotRedirect\Helper\Data')->getWishlistRedirectConfigValue();
+        if($configValue == 0)
+        {
+          $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]);
+          return $resultRedirect;
+        }
+        else
+        {
+          $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+          return $resultRedirect;
+        }
+        */
+        /*
+        elseif($configValue == 1)
+        {
+          $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+          return $resultRedirect;
+        }
+
+        else
+        {
+          return $resultRedirect;
+        }
+        */
+        /*
         // $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]); Redirects
-        $resultRedirect->setUrl($this->_redirect->getRefererUrl()); // Not Redirect
-        return $resultRedirect;
+        //$resultRedirect->setUrl($this->_redirect->getRefererUrl()); // Not Redirect
+        //return $resultRedirect;
+        */
+        //https://magento.stackexchange.com/questions/78457/how-to-get-value-from-core-config-data-table-in-magento-2
     }
 }
