@@ -5,11 +5,22 @@ namespace Crealevant\AddToWishlistNotRedirect\Helper;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
 
-class Data
+class Data extends AbstractHelper
 {
 
   //protected $_scopeConfig;
+  const XML_PATH_WISHLISTREDIRECT = 'wishlist/general/redirect';
 
+  public function getConfigValue($field, $storeId = null)
+  {
+    return $this->scopeConfig->getValue($field, ScopeInterface::SCOPE_STORE, $storeId);
+  }
+
+  public function getWishlistRedirectConfigValue($storeId = null)
+  {
+    return $this->getConfigValue(self::XML_PATH_WISHLISTREDIRECT, $storeId);
+  }
+/*
   public function __construct(\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig)
   {
     $this->_scopeConfig = $scopeConfig;
@@ -29,7 +40,7 @@ class Data
     //\Magento\Store\Model\ScopeInterface::SCOPE_STORE
   //);
   }
-
+*/
   //echo $this->scopeConfig->getValue($wishlistRedirectPath, $storeScope);
 }
 

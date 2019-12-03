@@ -1,4 +1,37 @@
 <?php
+
+namespace Crealevant\AddToWishlistNotRedirect\Controller\Index;
+
+class Config extends \Magento\Framework\App\Action\Action
+{
+  protected $helperData;
+
+  function __construct(\Magento\Framework\App\Action\Context $context, \Crealevant\AddToWishlistNotRedirect\Helper\Data $helperData)
+  {
+    $this->helperData = $helperData;
+    return parent::__construct($context);
+  }
+
+  public function execute()
+  {
+    if($this->helperData->getWishlistRedirectConfigValue() == 0)
+    {
+      //Redirect
+      $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]);
+      return $resultRedirect;
+    }
+    elseif ($this->helperData->getWishlistRedirectConfigValue() == 1)
+    {
+      //No redirect
+      $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+      return $resultRedirect;
+    }
+    else
+    {
+      //Failsafe
+    }
+  }
+}
 /*
 namespace Crealevant\AddToWishlistNotRedirect\Controller\Index;
 
