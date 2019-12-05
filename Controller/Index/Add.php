@@ -44,14 +44,14 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
         Action\Context $context,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider,
-        //Gets helper
+        //Gets helper (custom code)
         \Crealevant\AddToWishlistNotRedirect\Helper\Data $helperData,
         ProductRepositoryInterface $productRepository,
         Validator $formKeyValidator
     ) {
         $this->_customerSession = $customerSession;
         $this->wishlistProvider = $wishlistProvider;
-        // Assign helper to $helperData variable
+        // Assign helper to $helperData variable (custom code)
         $this->helperData = $helperData;
         $this->productRepository = $productRepository;
         $this->formKeyValidator = $formKeyValidator;
@@ -148,15 +148,24 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
                 __('We can\'t add the item to Wish List right now.')
             );
         }
-        // Uses getConfig method inside helper
-        // Checks if config value is 0
+        // <---- All code above is vendor/magento/module-wishlist/Controller/Index/Add.php
+        // unless otherwise specified
+
+        // -----> Uses getConfig method inside helper
+        // located in Crealevant/AddToWishlistNotRedirect/Helper/Data.php
+
+        // Config path is defined in Crealevant/AddToWishlistNotRedirect/etc/adminhtml/system.xml
+        // with convention section/group/field
+
+        // Checks if config value in config path wishlist/general/redirect is 0
+        // Config value is located in "core_config_data"-table in database
         if($this->helperData->getConfig('wishlist/general/redirect') == 0)
         {
           //Redirects to wishlist page (Default Magento behaviour)
           $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]);
           return $resultRedirect;
         }
-        // Checks if config value is 1
+        // Checks if config value in config path wishlist/general/redirect is 1
         elseif ($this->helperData->getConfig('wishlist/general/redirect') == 1)
         {
           //No redirect (Modified behaviour)
