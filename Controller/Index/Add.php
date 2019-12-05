@@ -11,8 +11,53 @@ use Magento\Framework\Controller\ResultFactory;
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class Add extends \Magento\Wishlist\Controller\Index\Add
+class Add extends \Magento\Wishlist\Controller\AbstractIndex
 {
+    /**
+     * @var \Magento\Wishlist\Controller\WishlistProviderInterface
+     */
+    protected $wishlistProvider;
+
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $_customerSession;
+
+    /**
+     * @var ProductRepositoryInterface
+     */
+    protected $productRepository;
+
+    /**
+     * @var Validator
+     */
+    protected $formKeyValidator;
+
+    /**
+     * @param Action\Context $context
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider
+     * @param ProductRepositoryInterface $productRepository
+     * @param Validator $formKeyValidator
+     */
+    public function __construct(
+        Action\Context $context,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider,
+        //Gets helper
+        \Crealevant\AddToWishlistNotRedirect\Helper\Data $helperData,
+        ProductRepositoryInterface $productRepository,
+        Validator $formKeyValidator
+    ) {
+        $this->_customerSession = $customerSession;
+        $this->wishlistProvider = $wishlistProvider;
+        // Assign helper to $helperData variable
+        $this->helperData = $helperData;
+        $this->productRepository = $productRepository;
+        $this->formKeyValidator = $formKeyValidator;
+        parent::__construct($context);
+    }
+
     /**
      * Adding new item
      *
@@ -22,7 +67,6 @@ class Add extends \Magento\Wishlist\Controller\Index\Add
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
-
     public function execute()
     {
         /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
@@ -104,39 +148,20 @@ class Add extends \Magento\Wishlist\Controller\Index\Add
                 __('We can\'t add the item to Wish List right now.')
             );
         }
-        //Temp code; Needs this code to for module to work at all (Needs to know what to do if no errors are found)
-        $resultRedirect->setUrl($this->_redirect->getRefererUrl());
-        return $resultRedirect;
-        /*
-        $configValue = $this->helper('Crealevant\AddToWishlistNotRedirect\Helper\Data')->getWishlistRedirectConfigValue();
-        if($configValue == 0)
+        // Uses getConfig method inside helper
+        // Checks if config value is 0
+        if($this->helperData->getConfig('wishlist/general/redirect') == 0)
         {
+          //Redirects to wishlist page (Default Magento behaviour)
           $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]);
           return $resultRedirect;
         }
-        else
+        // Checks if config value is 1
+        elseif ($this->helperData->getConfig('wishlist/general/redirect') == 1)
         {
+          //No redirect (Modified behaviour)
           $resultRedirect->setUrl($this->_redirect->getRefererUrl());
           return $resultRedirect;
         }
-        */
-        /*
-        elseif($configValue == 1)
-        {
-          $resultRedirect->setUrl($this->_redirect->getRefererUrl());
-          return $resultRedirect;
-        }
-
-        else
-        {
-          return $resultRedirect;
-        }
-        */
-        /*
-        // $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]); Redirects
-        //$resultRedirect->setUrl($this->_redirect->getRefererUrl()); // Not Redirect
-        //return $resultRedirect;
-        */
-        //https://magento.stackexchange.com/questions/78457/how-to-get-value-from-core-config-data-table-in-magento-2
     }
 }
