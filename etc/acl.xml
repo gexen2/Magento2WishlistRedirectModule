@@ -13,7 +13,6 @@
               </resource>
             </resource>
           </resource>
-          <!-- <resource id="Crealevant_AddToWishlistNotRedirect::wishlist_no_redirect" title="Wishlist No Redirect" sortOrder="51" /> -->
         </resources>
     </acl>
 </config>

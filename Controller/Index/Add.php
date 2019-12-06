@@ -157,16 +157,16 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
         // Config path is defined in Crealevant/AddToWishlistNotRedirect/etc/adminhtml/system.xml
         // with convention section/group/field
 
-        // Checks if config value in config path wishlist/general/redirect is 0
+        // Checks if config value in config path crealevantWishlist/crealevantGeneral/wishlistRedirect is 0
         // Config value is located in "core_config_data"-table in database
-        if($this->helperData->getConfig('wishlist/general/redirect') == 0)
+        if($this->helperData->getConfig('crealevantWishlist/crealevantGeneral/wishlistRedirect') == 0)
         {
           //Redirects to wishlist page (Default Magento behaviour)
           $resultRedirect->setPath('*', ['wishlist_id' => $wishlist->getId()]);
           return $resultRedirect;
         }
         // Checks if config value in config path wishlist/general/redirect is 1
-        elseif ($this->helperData->getConfig('wishlist/general/redirect') == 1)
+        elseif ($this->helperData->getConfig('crealevantWishlist/crealevantGeneral/wishlistRedirect') == 1)
         {
           //No redirect (Modified behaviour)
           $resultRedirect->setUrl($this->_redirect->getRefererUrl());
