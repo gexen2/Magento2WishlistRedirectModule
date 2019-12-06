@@ -1,6 +1,2 @@
-# Scripting conundrum: 
-PHP doesn't allow multiple class inheritance. (...) 
-Add.php is based on Magento\Wishlist\Controller\Index\Add (...) 
-Config.php needs to inherit from \Magento\Framework\App\Action\Action to work (...) 
-Config.php needs access to $resultRedirect variable declared in Add.php to work as intended (...) 
-WTF?
+# Magento 2 wishlist redirect module:
+Custom Magento 2 module to set whether customer will redirect to wishlist page or not when he/she adds product to wishlist. Support for config field in Magento admin.
