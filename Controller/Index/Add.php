@@ -44,14 +44,14 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
         Action\Context $context,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider,
-        //Gets helper (custom code)
+        //Gets helper (custom code) --->
         \Crealevant\AddToWishlistNotRedirect\Helper\Data $helperData,
         ProductRepositoryInterface $productRepository,
         Validator $formKeyValidator
     ) {
         $this->_customerSession = $customerSession;
         $this->wishlistProvider = $wishlistProvider;
-        // Assign helper to $helperData variable (custom code)
+        // Assign helper to $helperData variable (custom code) ---->
         $this->helperData = $helperData;
         $this->productRepository = $productRepository;
         $this->formKeyValidator = $formKeyValidator;
